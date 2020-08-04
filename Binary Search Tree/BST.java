@@ -22,12 +22,16 @@ public class BST<T extends Comparable<T>> {
         return size() == 0;
     }
 
+    public int size() {
+        return nodeCount;
+    }
+
     // Add an element to this binary tree. Returns true if we successfully perform
     // an insertion
     public boolean add(T elem) {
         // check if the value already exists in this binary tree, if it does ignore
         // adding it
-        if (contains(elem)) {
+        if (contains(root, elem)) {
             return false;
         } else {
             root = add(root, elem);
@@ -57,7 +61,7 @@ public class BST<T extends Comparable<T>> {
     public boolean remove(T elem) {
         // Make sure the node we want to remove
         // actually exists before we remove it
-        if (contains(elem)) {
+        if (contains(root, elem)) {
             root = remove(root, elem);
             nodeCount--;
             return true;
