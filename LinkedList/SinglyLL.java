@@ -1,4 +1,29 @@
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class SinglyLL<E> implements ListI<E> {
+
+    class IteratorHelper implements Iterator<E>{
+
+        Node<E> index;
+        public IteratorHelper(){
+            index = head;
+        }
+
+
+        @Override
+        public boolean hasNext() {
+            return index!=null;
+        }
+
+        @Override
+        public E next() {
+            if(!hasNext()) throw new NoSuchElementException();
+            E val = index.data;
+            index = index.next;
+            return val;
+        }
+    }
     class Node<E> {
         E data;
         Node<E> next;
@@ -107,6 +132,18 @@ public class SinglyLL<E> implements ListI<E> {
             current = current.next;
         }
         return false;
+    }
+
+    public E peekFirst(){
+        if(head==null)
+            return null;
+        return head.data;
+    }
+
+    public E peekLast(){
+        if(tail==null)
+            return null;
+        return tail.data;
     }
 }
 
